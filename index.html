@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARCODE GENERATOR - Generate Barcode Online Gratis | Vinnesia</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Generate barcode online gratis dengan BARCODE GENERATOR. Buat barcode Code128, EAN-13, UPC-A dan format lainnya dengan mudah. Tool barcode generator terbaik.">
+    <meta name="keywords" content="barcode generator, generate barcode, barcode online, buat barcode, barcode gratis, code128, ean13, upc barcode">
+    <meta name="author" content="VIN NESIA">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="BARCODE GENERATOR - Generate Barcode Online Gratis">
+    <meta property="og:description" content="Generate barcode online gratis dengan BARCODE GENERATOR. Buat barcode Code128, EAN-13, UPC-A dan format lainnya dengan mudah.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://barcode.vinnesia.my.id">
+    <meta property="og:image" content="https://barcode.vinnesia.my.id/logo.png">
+    <meta property="og:site_name" content="VIN NESIA">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BARCODE GENERATOR - Generate Barcode Online Gratis">
+    <meta name="twitter:description" content="Generate barcode online gratis dengan BARCODE GENERATOR. Buat barcode Code128, EAN-13, UPC-A dan format lainnya dengan mudah.">
+    <meta name="twitter:image" content="https://barcode.vinnesia.my.id/logo.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://barcode.vinnesia.my.id">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/logo.png">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PYZXZFNER"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3PYZXZFNER');
+    </script>
+    
+    <!-- JsBarcode Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2d1b69 0%, #11998e 50%, #38ef7d 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #2d1b69;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffd700, #38ef7d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .generator-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ffd700;
+            font-size: 1.1rem;
+        }
+        
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #8b5a2b, #ffd700);
+            color: #2d1b69;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+        }
+        
+        .result-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            color: #2d1b69;
+            display: none;
+        }
+        
+        .barcode-container {
+            margin: 30px 0;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(17, 153, 142, 0.4);
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 50px 0 20px;
+            margin-top: 60px;
+            backdrop-filter: blur(15px);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section ul li a {
+            color: #8b5cf6;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #ffd700;
+            transform: translateX(5px);
+        }
+        
+        .footer-section.email ul li a {
+            color: #38ef7d;
+            text-decoration: underline;
+        }
+        
+        .footer-section.email ul li a:hover {
+            color: #11998e;
+        }
+        
+        .footer-section.social ul li a {
+            color: #ffd700;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 30px 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .home-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            margin: 20px auto;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .generator-card {
+                padding: 25px;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .generator-card {
+                padding: 20px;
+            }
+            
+            .generate-btn {
+                font-size: 1rem;
+            }
+        }
+        
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">BC</div>
+            <h1>BARCODE GENERATOR</h1>
+            <p>Generate barcode online gratis dengan mudah. Mendukung berbagai format barcode untuk kebutuhan bisnis dan personal Anda.</p>
+        </header>
+        
+        <div class="generator-card">
+            <div class="input-group">
+                <label for="barcodeText">Text/Data untuk Barcode</label>
+                <input type="text" id="barcodeText" placeholder="Masukkan text atau data yang ingin dijadikan barcode" value="123456789012">
+            </div>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="barcodeFormat">Format Barcode</label>
+                    <select id="barcodeFormat">
+                        <option value="CODE128">Code 128</option>
+                        <option value="EAN13">EAN-13</option>
+                        <option value="EAN8">EAN-8</option>
+                        <option value="UPC">UPC-A</option>
+                        <option value="CODE39">Code 39</option>
+                        <option value="ITF14">ITF-14</option>
+                        <option value="MSI">MSI</option>
+                        <option value="pharmacode">Pharmacode</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="barcodeWidth">Lebar Barcode</label>
+                    <input type="number" id="barcodeWidth" min="1" max="10" value="2" placeholder="1-10">
+                </div>
+            </div>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="barcodeHeight">Tinggi Barcode</label>
+                    <input type="number" id="barcodeHeight" min="50" max="200" value="100" placeholder="50-200">
+                </div>
+                
+                <div class="input-group">
+                    <label for="displayValue">Tampilkan Text</label>
+                    <select id="displayValue">
+                        <option value="true">Ya</option>
+                        <option value="false">Tidak</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="generate-btn" onclick="generateBarcode()">
+                🎯 Generate Barcode
+            </button>
+        </div>
+        
+        <div class="result-card" id="resultCard">
+            <h2>Barcode Berhasil Dibuat!</h2>
+            <div class="barcode-container">
+                <svg id="barcode"></svg>
+            </div>
+            <div>
+                <button class="download-btn" onclick="downloadBarcode('png')">Download PNG</button>
+                <button class="download-btn" onclick="downloadBarcode('svg')">Download SVG</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                    </svg>
+                    Navigasi
+                </h3>
+                <ul>
+                    <li><a href="https://www.vinnesia.my.id">🏠 Homepage</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M19 19H5V5H19V19Z"/>
+                    </svg>
+                    Bantuan
+                </h3>
+                <ul>
+                    <li><a href="#cara-pakai">📖 Cara Pakai Tools</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2M12 20C7.59 20 4 16.41 4 12S7.59 4 12 4 20 7.59 20 12 16.41 20 12 20M15.5 11H13V7H11V11H8.5L12 14.5L15.5 11Z"/>
+                    </svg>
+                    Legal
+                </h3>
+                <ul>
+                    <li><a href="#privacy">⚖️ Privacy Policy</a></li>
+                    <li><a href="#terms">⚖️ Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section email">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4Z"/>
+                    </svg>
+                    Email
+                </h3>
+                <ul>
+                    <li><a href="mailto:admin@vinnesia.my.id">📧 admin@vinnesia.my.id</a></li>
+                    <li><a href="mailto:support@vinnesia.my.id">📧 support@vinnesia.my.id</a></li>
+                    <li><a href="mailto:privacy@vinnesia.my.id">📧 privacy@vinnesia.my.id</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section social">
+                <h3>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5 3H19A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3M9.5 9A1.5 1.5 0 1 0 11 10.5A1.5 1.5 0 0 0 9.5 9M12 4A8 8 0 1 1 4 12A8 8 0 0 1 12 4Z"/>
+                    </svg>
+                    Media Sosial
+                </h3>
+                <ul>
+                    <li><a href="#instagram">📷 Instagram</a></li>
+                    <li><a href="#whatsapp">💬 WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://www.vinnesia.my.id" class="home-btn">🏠 Visit Homepage</a>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 VIN NESIA. All rights reserved. Built with ❤️ for everyone.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function generateBarcode() {
+            const text = document.getElementById('barcodeText').value;
+            const format = document.getElementById('barcodeFormat').value;
+            const width = parseInt(document.getElementById('barcodeWidth').value);
+            const height = parseInt(document.getElementById('barcodeHeight').value);
+            const displayValue = document.getElementById('displayValue').value === 'true';
+            
+            if (!text.trim()) {
+                alert('Silakan masukkan text atau data untuk barcode!');
+                return;
+            }
+            
+            try {
+                const barcodeElement = document.getElementById('barcode');
+                
+                // Clear previous barcode
+                barcodeElement.innerHTML = '';
+                
+                // Generate new barcode
+                JsBarcode(barcodeElement, text, {
+                    format: format,
+                    width: width,
+                    height: height,
+                    displayValue: displayValue,
+                    fontSize: 16,
+                    margin: 10,
+                    background: "#ffffff",
+                    lineColor: "#000000"
+                });
+                
+                // Show result card
+                document.getElementById('resultCard').style.display = 'block';
+                document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                alert('Error generating barcode: ' + error.message + '\nPastikan data yang dimasukkan sesuai dengan format yang dipilih.');
+            }
+        }
+        
+        function downloadBarcode(format) {
+            const svg = document.getElementById('barcode');
+            const svgData = new XMLSerializer().serializeToString(svg);
+            
+            if (format === 'svg') {
+                const blob = new Blob([svgData], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'barcode.svg';
+                a.click();
+                URL.revokeObjectURL(url);
+            } else if (format === 'png') {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    
+                    const url = canvas.toDataURL('image/png');
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'barcode.png';
+                    a.click();
+                };
+                
+                img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+            }
+        }
+        
+        // Auto-generate barcode on page load
+        window.onload = function() {
+            generateBarcode();
+        };
+        
+        // Generate barcode on Enter key press
+        document.getElementById('barcodeText').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateBarcode();
+            }
+        });
+    </script>
+</body>
+</html>
